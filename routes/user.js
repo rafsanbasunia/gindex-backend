@@ -10,6 +10,7 @@ const forgotPassEmail = require('../templates/request/existing/forgotPass');
 
 //Model Imports
 const User = require("../models/user");
+const Settings = require("../models/siteSettings");
 
 router.post('/verify', function(req, res){
 	if(checkOrigin(req.headers.origin)){
@@ -41,7 +42,7 @@ router.post('/media/transmit', function(req, res){
 				if(result){
 					jwt.verify(req.body.token, process.env.TOKENSECRET, function(error, decoded){
 						if(decoded){
-							let mediaToken = jwt.sign({ result }, process.env.TOKENSECRET, {expiresIn: 45});
+							let mediaToken = jwt.sign({ result }, process.env.TOKENSECRET, {expiresIn: 10800});
 							res.status(200).send({ auth: true, registered: true, token: mediaToken });
 						} else {
 							res.status(200).send({auth: false, registered: false, tokenuser: false});
@@ -107,6 +108,45 @@ router.post('/changepassword', function(req, res){
 	}
 });
 
+router.post('/sitesettings', function(req, res){
+	if(checkOrigin(req.headers.origin)){
+		User.findOne({ email: req.body.email }, function(error, result){
+			if(result){
+				if(result.admin && result.superadmin){
+					Settings.findOne({ cId: process.env.FRONTENDSITENAME }, function(error, settingsData){
+						if(settingsData){
+							Settings.updateOne({ cId: process.env.FRONTENDSITENAME }, { $set: { requests: req.body.requests, adminRequests: req.body.adminrequests } }, function(error){
+								if(!error){
+									res.status(200).send({ auth: true, registered: true, changed: true, message: "Your Preferences have been Saved." });
+								} else {
+									res.status(200).send({ auth: true, registered: true, changed: false, message: "Error Occured while Saving Your Preferences" });
+								}
+							})
+						} else {
+							const newData = new Settings({
+								cId: process.env.FRONTENDSITENAME,
+								requests: req.body.requests,
+								adminRequests: req.body.adminrequests
+							});
+							newData.save(function(error, doc){
+								if(!error){
+									res.status(200).send({ auth: true, registered: true, changed: true, data: doc, message: "Your Preferences have been Saved." });
+								}
+							})
+						}
+					})
+				} else {
+					res.status(200).send({ auth: false, registered: true, changed: false, message: "You don't Have Enough Permissions." })
+				}
+			} else {
+				res.status(200).send({ auth: false, registered: false, changed: false, message: "Account Doesn't Exists" })
+			}
+		})
+	} else {
+		res.status(200).send({ auth: false, message: "UNAUTHORIZED" })
+	}
+})
+
 router.post('/forgotpass', function(req, res){
 	if(checkOrigin(req.headers.origin)){
 		User.findOne({ email: req.body.email }, function(error, result){
@@ -114,13 +154,22 @@ router.post('/forgotpass', function(req, res){
 				var temporaryPass = randomstring.generate({ length: 8, charset: 'alphanumeric' });
 				bcrypt.hash(temporaryPass, 10, function(err, hashedPass){
 					if(hashedPass){
-						User.updateOne({ email: req.body.email }, {$set: { password: null, temppassword: hashedPass, verified: false }}, async function(error){
+						User.updateOne({ email: req.body.email }, {$set: { password: null, temppassword: hashedPass, verified: false }}, function(error){
 							if(!error){
-								await transport({
-									toemail: req.body.email,
+								const otpMessage = {
+									from: `"${process.env.FRONTENDSITENAME} - Support"<${process.env.EMAILID}>`,
+									to: req.body.email,
+									replyTo: process.env.REPLYTOMAIL,
 									subject: 'Reset Your Password',
-									htmlContent: forgotPassEmail(result, temporaryPass),
-								});
+									html: forgotPassEmail(result, temporaryPass),
+								}
+								transport.sendMail(otpMessage, function(error, info){
+									if(error){
+										console.log(error);
+									} else {
+										console.log(info);
+									}
+								})
 								res.status(200).send({auth: true, registered: true, changed: true, message: "OTP has been Sent to Your Email. Reset Your Password by entering the OTP." })
 							} else {
 								res.status(200).send({ auth: false, registered: false, changed: false, message: "Error Occured While Generating OTP. Please Try Again Later." });
@@ -146,15 +195,25 @@ router.post('/delete', function(req, res){
 					if(result.password != null && req.body.pass != null){
 						bcrypt.compare(req.body.pass, result.password, function(err, synced){
 							if(synced){
-								User.deleteOne({ email: req.body.email },async function(error){
+								User.deleteOne({ email: req.body.email }, function(error){
 									if(error){
 										res.status(200).send({ auth: true, registered: true, deleted: false, message: "Some Error Pinging the Servers. Try Again Later." });
 									} else {
-										await transport({
-											toemail: req.body.email,
-											subject: 'Account has been Deleted.',
-											htmlContent: selfDeleteEmail(result),
-										});
+										const deleteMessage = {
+											 from: `"${process.env.FRONTENDSITENAME} - Support"<${process.env.EMAILID}>`,
+											 to: req.body.email,
+											 bcc: req.body.ADMINEMAIL,
+											 replyTo: process.env.REPLYTOMAIL,
+											 subject: 'Account has been Deleted.',
+											 html: selfDeleteEmail(result)
+										};
+										transport.sendMail(deleteMessage, function(error, info){
+											if(error){
+												console.log(error);
+											} else {
+												console.log(info);
+											}
+										})
 										res.status(200).send({ auth: true, registered: true, deleted: true, message: "Your Account has been deleted" });
 									}
 								})
