@@ -12,21 +12,21 @@ const checkOrigin = require("../plugins/checkOrigin");
 router.get('/', function(req, res){
 	User.findOne({ superadmin: true }, function(error, result){
 		if(result){
-			res.render("dashboard.ejs", { user: false, showPass: false, data: "This is a Backend for G-Index. This has Been Already Setup. So Nothing Exists Here Afterwards. Use Your Frontend to Communicate." });
+			res.render(__dirname + "/../views/dashboard.ejs", { user: false, showPass: false, data: "This is a Backend for G-Index. This has Been Already Setup. So Nothing Exists Here Afterwards. Use Your Frontend to Communicate." });
 		} else {
-			res.render("signup.ejs");
+			res.render(__dirname + "/../views/signup.ejs");
 		}
 	})
 });
 
 router.get('/generate', function(req, res){
-	res.render("generate.ejs");
+	res.render(__dirname + "/../views/generate.ejs");
 });
 
 router.post('/generate', function(req, res){
 	bcrypt.hash(req.body.password, 10, function(err, hashedPass){
 		if(hashedPass){
-			res.render("dashboard.ejs", {user: false, showPass: true, hybrid: hashedPass})
+			res.render(__dirname + "/../views/dashboard.ejs", {user: false, showPass: true, hybrid: hashedPass})
 		}
 	})
 });
