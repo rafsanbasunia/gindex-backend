@@ -1,6 +1,6 @@
 {
   "name": "g-index-backend",
-  "version": "2.1.9",
+  "version": "2.1.8",
   "description": "",
   "main": "app.js",
   "scripts": {
