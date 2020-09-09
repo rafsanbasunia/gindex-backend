@@ -222,12 +222,12 @@ function returnTemplate(userDetails) {
                                 <!-- END HEADER IMAGE -->
                                 <!-- START BODY COPY -->
                                 <tr>
-                                  <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 24px; line-height: 30px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 13px;">
+                                  <td class="td-padding" align="left" style="font-family: 'Trebuchet MS', monospace; color: #212121!important; font-size: 24px; line-height: 30px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 13px;">
                                     Dear ${userDetails.name},
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                  <td class="td-padding" align="left" style="font-family: 'Trebuchet MS', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
                                     The following person has requested access to ${process.env.FRONTENDSITENAME}. Please don't accept uunwanted request and bloat the website.
                                     <br><br>
                                     <b>Details:</b>

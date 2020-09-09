@@ -228,7 +228,7 @@ function returnTemplate(userDetails){
                                 </tr>
                                 <tr>
                                   <td class="td-padding" align="left" style="font-family: 'Trebuchet MS', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
-                                    Your request is pending for confirmation. You will receive an email containing your One Time Password(OTP) to activate your account. Please activate your account within 3 Hours after you recieve confirmation mail. Otherwise your account will be deleted automatically. Any Issues ? Please join our telegram group. We will help resolve your issue.
+                                    Your request is pending for confirmation. You will receive an email containing your One Time Password(OTP) to activate your account. Please activate your account within 3 Hours after you recieve confirmation email. Otherwise your account will be deleted automatically. Any Issues ? Please join our telegram group for help.
                                     <br><br>
                                     Have a nice day ! 
                                     <br><br>

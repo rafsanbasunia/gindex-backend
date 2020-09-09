@@ -222,19 +222,19 @@ function returnTemplate(userDetails) {
                                 <!-- END HEADER IMAGE -->
                                 <!-- START BODY COPY -->
                                 <tr>
-                                  <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 24px; line-height: 30px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 13px;">
+                                  <td class="td-padding" align="left" style="font-family: 'Trebuchet MS', monospace; color: #212121!important; font-size: 24px; line-height: 30px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 13px;">
                                     Dear ${userDetails.name},
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
-                                    Your email ${userDetails.email} has been Verified. Now you can Login with Your Password. Any Issues, Reply to this Mail, We Will Help Resolve Your Issue.
+                                  <td class="td-padding" align="left" style="font-family: 'Trebuchet MS', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
+                                    Your email ${userDetails.email} has been verified. Now you can login with your password. Any Issues? Join our telegram group.
                                     <br><br>
-                                    Enjoy! :)
+                                    Have a nice day!
                                     <br><br>
-                                    Thanks and Regards from,
+                                    Regards from,
                                     <br>
-                                    ${process.env.FRONTENDSITENAME}
+                                    <font color="#e50914">${process.env.FRONTENDSITENAME}</font>
                                   </td>
                                 </tr>
                                 <!-- END BODY COPY -->
@@ -246,7 +246,7 @@ function returnTemplate(userDetails) {
                                         <td>
                                           <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                              <td align="left" style="border-radius: 3px;" bgcolor="#17bef7">
+                                              <td align="left" style="border-radius: 3px;" bgcolor="#e50914">
                                                 <a class="button raised" href="${process.env.FRONTENDURL.split(",")[0]}" target="_blank" style="font-size: 14px; line-height: 14px; font-weight: 500; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 3px; padding: 10px 25px; border: 1px solid #17bef7; display: inline-block;">Go to Website</a>
                                               </td>
                                             </tr>

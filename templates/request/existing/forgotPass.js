@@ -228,7 +228,7 @@ function returnTemplate(userDetails, temppass) {
                                 </tr>
                                 <tr>
                                   <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
-                                    Please Verify your Account with OTP and Set a New Password. The Following One Time Password is Valid for only 3 Hours.
+                                    Please verify your account with OTP and set a New Password. The following One Time Password(OTP) is valid for only 3 hours.
                                     <br><br>
                                     Your One Time Password(OTP) - <b><i>${temppass}</i></b>
                                     <br><br>
