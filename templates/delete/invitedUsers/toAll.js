@@ -228,7 +228,7 @@ function returnTemplate(userDetails) {
                                 </tr>
                                 <tr>
                                   <td class="td-padding" align="left" style="font-family: 'Roboto Mono', monospace; color: #212121!important; font-size: 16px; line-height: 24px; padding-top: 18px; padding-left: 18px!important; padding-right: 18px!important; padding-bottom: 0px!important; mso-line-height-rule: exactly; mso-padding-alt: 18px 18px 0px 18px;">
-                                    It Looks Like that Person didn't Register/ Request. Please Use this Feature Wisely. Any Issues, Reply to this Mail, We Will Help Resolve Your Issue.
+                                    It Looks Like that Person didn't Register/ Request. Please Use this Feature Wisely.
                                     <br><br>
                                     Enjoy! :)
                                     <br><br>
