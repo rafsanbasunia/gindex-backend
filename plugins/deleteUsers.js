@@ -8,7 +8,7 @@ function deleteTimeout() {
     if(result){
       result.forEach((user, i) => {
         const currentDate = Date.now();
-        const expiryDate = user.registeredDate + (10800 * 1000);
+        const expiryDate = user.registeredDate + (172800 * 1000);
         console.log(currentDate, expiryDate);
         if(currentDate > expiryDate){
           User.deleteOne({ email: user.email }, function(error){
